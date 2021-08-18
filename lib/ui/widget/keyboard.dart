@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kitchen_timer/model/kitchen_timer_model.dart';
+import 'package:provider/provider.dart';
 
 class Keyboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    void _onPressed() {}
+    final kitchenTimerModel = Provider.of<KitchenTimerModel>(context);
     final List<List<String>> numberKeys = [
       ['1', '2', '3'],
       ['4', '5', '6'],
@@ -14,7 +16,9 @@ class Keyboard extends StatelessWidget {
 
     List<TextButton> convertTextIntoTextButton(List<String> list) => list
         .map((str) => TextButton(
-              onPressed: _onPressed,
+              onPressed: () {
+                kitchenTimerModel.testFunc(str);
+              },
               child: Text(str, style: TextStyle(fontSize: 100)),
             ))
         .toList();

@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 
 class KitchenTimerModel extends ChangeNotifier {
   var now = '00:00:00';
-  void testFunc() {
-    now = DateTime.now().toString();
+  testFunc(str) {
+    // print(str);
+    now = str;
     notifyListeners();
   }
 
