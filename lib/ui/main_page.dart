@@ -8,19 +8,29 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final kitchenTimerModel1 =
-        context.select((KitchenTimerModel foo) => foo.getSelectedScreen());
-    final kitchenTimerModel2 =
-        context.select((KitchenTimerModel value) => value.testFunc());
+        context.select((KitchenTimerModel now) => now.now);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text('キッチンタイマー'),
       ),
-      body: Keyboard(),
+      body: Center(
+        child: Column(
+          children: [
+            Consumer<KitchenTimerModel>(
+              builder: (context, model, _) => Text(
+                model.now,
+                style: TextStyle(fontSize: 80),
+              ),
+            ),
+            Keyboard(),
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          context.read<KitchenTimerModel>().testFunc();
+          context.read<KitchenTimerModel>().testFunc('test');
         },
       ),
     );
