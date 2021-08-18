@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final kitchenTimerModel1 =
-        context.select((KitchenTimerModel now) => now.now);
+    final kitchenTimerModel1 = context.select(
+        (KitchenTimerModel inputedNumber) => inputedNumber.inputedNumber);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -19,7 +19,7 @@ class MainPage extends StatelessWidget {
           children: [
             Consumer<KitchenTimerModel>(
               builder: (context, model, _) => Text(
-                model.now,
+                model.inputedNumber,
                 style: TextStyle(fontSize: 80),
               ),
             ),

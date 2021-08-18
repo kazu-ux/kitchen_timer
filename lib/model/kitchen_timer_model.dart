@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
 class KitchenTimerModel extends ChangeNotifier {
-  var now = '00:00:00';
-  testFunc(str) {
+  var inputedNumber = '';
+  void testFunc(String str) {
     // print(str);
-    now = str;
+    inputedNumber += str;
     notifyListeners();
   }
 
@@ -12,11 +12,11 @@ class KitchenTimerModel extends ChangeNotifier {
     return Column(
       children: [
         Text(
-          '$now',
+          '$inputedNumber',
           style: TextStyle(fontSize: 30),
         ),
         Text(
-          '$now',
+          '$inputedNumber',
           style: TextStyle(fontSize: 30),
         ),
       ],
