@@ -8,8 +8,7 @@ class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    /* final kitchenTimerModel1 = context.select(
-        (KitchenTimerModel inputedNumber) => inputedNumber.inputedNumber); */
+    final backspace = Provider.of<KitchenTimerModel>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -18,21 +17,30 @@ class MainPage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Consumer<KitchenTimerModel>(
-              builder: (context, model, _) => Text(
-                model.inputedNumber,
-                style: const TextStyle(fontSize: 80),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Consumer<KitchenTimerModel>(
+                  builder: (context, model, _) => Text(
+                    model.time,
+                    style: const TextStyle(fontSize: 80),
+                  ),
+                ),
+                IconButton(
+                  // padding: const EdgeInsets.only(left: 40),
+                  onPressed: backspace.backspace,
+                  icon: const Icon(Icons.backspace),
+                  iconSize: 40,
+                )
+              ],
             ),
             const Keyboard(),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.read<KitchenTimerModel>().testFunc('test');
-        },
-        child: const Icon(Icons.add),
+        onPressed: () {},
+        child: const Icon(Icons.play_arrow),
       ),
     );
   }
