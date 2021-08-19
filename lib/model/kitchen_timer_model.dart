@@ -30,6 +30,9 @@ class KitchenTimerModel extends ChangeNotifier {
   }
 
   void backspace() {
+    if (inputedNumber.isEmpty) {
+      return;
+    }
     inputedNumber.removeLast();
     convertListNumberToText(inputedNumber);
     notifyListeners();
