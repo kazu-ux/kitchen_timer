@@ -4,10 +4,12 @@ import 'package:kitchen_timer/model/kitchen_timer_model.dart';
 import 'package:provider/provider.dart';
 
 class Keyboard extends StatelessWidget {
+  const Keyboard({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final kitchenTimerModel = Provider.of<KitchenTimerModel>(context);
-    final List<List<String>> numberKeys = [
+    final kitchenTimerModel =
+        context.select((KitchenTimerModel value) => value);
+    final numberKeys = <List<String>>[
       ['1', '2', '3'],
       ['4', '5', '6'],
       ['7', '8', '9'],
@@ -17,16 +19,15 @@ class Keyboard extends StatelessWidget {
     List<TextButton> convertTextIntoTextButton(List<String> list) => list
         .map((str) => TextButton(
               onPressed: () {
-                kitchenTimerModel.testFunc(str);
+                kitchenTimerModel.addNumberToList(str);
               },
-              child: Text(str, style: TextStyle(fontSize: 100)),
+              child: Text(str, style: const TextStyle(fontSize: 100)),
             ))
         .toList();
 
-    final List<List<TextButton>> textButtonList =
-        numberKeys.map((list) => convertTextIntoTextButton(list)).toList();
+    final textButtonList = numberKeys.map(convertTextIntoTextButton).toList();
 
-    final List<Row> rowList = textButtonList
+    final rowList = textButtonList
         .map((list) => Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

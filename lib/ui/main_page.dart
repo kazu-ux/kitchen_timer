@@ -5,33 +5,42 @@ import 'package:kitchen_timer/ui/widget/keyboard.dart';
 import 'package:provider/provider.dart';
 
 class MainPage extends StatelessWidget {
+  const MainPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final kitchenTimerModel1 =
-        context.select((KitchenTimerModel now) => now.now);
+    final backspace = Provider.of<KitchenTimerModel>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('キッチンタイマー'),
+        title: const Text('キッチンタイマー'),
       ),
       body: Center(
         child: Column(
           children: [
-            Consumer<KitchenTimerModel>(
-              builder: (context, model, _) => Text(
-                model.now,
-                style: TextStyle(fontSize: 80),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Consumer<KitchenTimerModel>(
+                  builder: (context, model, _) => Text(
+                    model.time,
+                    style: const TextStyle(fontSize: 80),
+                  ),
+                ),
+                IconButton(
+                  // padding: const EdgeInsets.only(left: 40),
+                  onPressed: backspace.backspace,
+                  icon: const Icon(Icons.backspace),
+                  iconSize: 40,
+                )
+              ],
             ),
-            Keyboard(),
+            const Keyboard(),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          context.read<KitchenTimerModel>().testFunc('test');
-        },
+        onPressed: () {},
+        child: const Icon(Icons.play_arrow),
       ),
     );
   }
