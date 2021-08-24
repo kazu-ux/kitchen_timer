@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kitchen_timer/model/kitchen_timer_model.dart';
+import 'package:kitchen_timer/ui/timer_page.dart';
 import 'package:kitchen_timer/ui/widget/keyboard.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final backspace = Provider.of<KitchenTimerModel>(context);
+    var inputedTime = '';
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -22,12 +24,11 @@ class MainPage extends StatelessWidget {
               children: [
                 Consumer<KitchenTimerModel>(
                   builder: (context, model, _) => Text(
-                    model.time,
+                    inputedTime = model.time,
                     style: const TextStyle(fontSize: 80),
                   ),
                 ),
                 IconButton(
-                  // padding: const EdgeInsets.only(left: 40),
                   onPressed: backspace.backspace,
                   icon: const Icon(Icons.backspace),
                   iconSize: 40,
@@ -39,7 +40,14 @@ class MainPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute<void>(builder: (context) {
+            return TimerPage(
+              testStr: inputedTime,
+            );
+          }));
+        },
         child: const Icon(Icons.play_arrow),
       ),
     );
