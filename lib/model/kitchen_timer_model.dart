@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class KitchenTimerModel extends ChangeNotifier {
-  List<int> inputedNumber = [];
+  List<int> inputedNumber = [0, 0, 0, 0, 0, 0];
   String padNumber = '';
   String hours = '';
   String minutes = '';
@@ -9,22 +9,25 @@ class KitchenTimerModel extends ChangeNotifier {
   String time = '00h 00m 00s';
 
   String convertListNumberToText(List<int> inputedNumber) {
-    var numberStr = '';
-    inputedNumber.forEach((element) {
-      numberStr += element.toString();
-    });
-    padNumber = numberStr.padLeft(6, '0');
-    hours = padNumber.substring(0, 2);
-    minutes = padNumber.substring(2, 4);
-    seconds = padNumber.substring(4, 6);
+    hours = inputedNumber[inputedNumber.length - 6].toString() +
+        inputedNumber[inputedNumber.length - 5].toString();
+
+    minutes = inputedNumber[inputedNumber.length - 4].toString() +
+        inputedNumber[inputedNumber.length - 3].toString();
+
+    seconds = inputedNumber[inputedNumber.length - 2].toString() +
+        inputedNumber[inputedNumber.length - 1].toString();
+
     return time = '${hours}h ${minutes}m ${seconds}s';
   }
 
   dynamic addNumberToList(String str) {
-    if (inputedNumber.length >= 6) {
+    if (inputedNumber.first != 0) {
       return;
     }
     inputedNumber.add(int.parse(str));
+    inputedNumber.removeAt(0);
+    print(inputedNumber);
     convertListNumberToText(inputedNumber);
     notifyListeners();
   }
@@ -34,6 +37,8 @@ class KitchenTimerModel extends ChangeNotifier {
       return;
     }
     inputedNumber.removeLast();
+    inputedNumber.insert(0, 0);
+    print(inputedNumber);
     convertListNumberToText(inputedNumber);
     notifyListeners();
   }
