@@ -9,7 +9,7 @@ class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final backspace = Provider.of<KitchenTimerModel>(context);
+    final kitchenTimerModel = Provider.of<KitchenTimerModel>(context);
     var inputedTime = '';
     return Scaffold(
       appBar: AppBar(
@@ -24,12 +24,12 @@ class MainPage extends StatelessWidget {
               children: [
                 Consumer<KitchenTimerModel>(
                   builder: (context, model, _) => Text(
-                    inputedTime = model.time,
+                    model.time,
                     style: const TextStyle(fontSize: 80),
                   ),
                 ),
                 IconButton(
-                  onPressed: backspace.backspace,
+                  onPressed: kitchenTimerModel.backspace,
                   icon: const Icon(Icons.backspace),
                   iconSize: 40,
                 )
@@ -44,7 +44,7 @@ class MainPage extends StatelessWidget {
           Navigator.of(context)
               .push(MaterialPageRoute<void>(builder: (context) {
             return TimerPage(
-              testStr: inputedTime,
+              testStr: kitchenTimerModel.totalSeconds,
             );
           }));
         },

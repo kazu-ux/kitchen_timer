@@ -7,18 +7,21 @@ class KitchenTimerModel extends ChangeNotifier {
   String minutes = '';
   String seconds = '';
   String time = '00h 00m 00s';
+  String totalSeconds = '';
 
   String convertListNumberToText(List<int> inputedNumber) {
-    hours = inputedNumber[inputedNumber.length - 6].toString() +
-        inputedNumber[inputedNumber.length - 5].toString();
-
-    minutes = inputedNumber[inputedNumber.length - 4].toString() +
-        inputedNumber[inputedNumber.length - 3].toString();
-
-    seconds = inputedNumber[inputedNumber.length - 2].toString() +
-        inputedNumber[inputedNumber.length - 1].toString();
+    hours = inputedNumber[0].toString() + inputedNumber[1].toString();
+    minutes = inputedNumber[2].toString() + inputedNumber[3].toString();
+    seconds = inputedNumber[4].toString() + inputedNumber[5].toString();
 
     return time = '${hours}h ${minutes}m ${seconds}s';
+  }
+
+  void convertIntoSeconds() {
+    totalSeconds =
+        (int.parse(hours) * 3600 + int.parse(minutes) * 60 + int.parse(seconds))
+            .toString();
+    print(totalSeconds);
   }
 
   dynamic addNumberToList(String str) {
@@ -29,6 +32,7 @@ class KitchenTimerModel extends ChangeNotifier {
     inputedNumber.removeAt(0);
     print(inputedNumber);
     convertListNumberToText(inputedNumber);
+    convertIntoSeconds();
     notifyListeners();
   }
 
@@ -40,6 +44,7 @@ class KitchenTimerModel extends ChangeNotifier {
     inputedNumber.insert(0, 0);
     print(inputedNumber);
     convertListNumberToText(inputedNumber);
+    convertIntoSeconds();
     notifyListeners();
   }
 }
