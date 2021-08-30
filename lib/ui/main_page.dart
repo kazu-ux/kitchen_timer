@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kitchen_timer/model/kitchen_timer_model.dart';
+import 'package:kitchen_timer/model/time_display_model.dart';
+import 'package:kitchen_timer/model/timer_model.dart';
 import 'package:kitchen_timer/ui/timer_page.dart';
 import 'package:kitchen_timer/ui/widget/keyboard.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +10,7 @@ class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final kitchenTimerModel = Provider.of<KitchenTimerModel>(context);
+    final timeDisplayModel = Provider.of<TimeDisplayModel>(context);
     var inputedTime = '';
     return Scaffold(
       appBar: AppBar(
@@ -22,14 +23,14 @@ class MainPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Consumer<KitchenTimerModel>(
+                Consumer<TimeDisplayModel>(
                   builder: (context, model, _) => Text(
                     model.time,
                     style: const TextStyle(fontSize: 80),
                   ),
                 ),
                 IconButton(
-                  onPressed: kitchenTimerModel.backspace,
+                  onPressed: timeDisplayModel.backspace,
                   icon: const Icon(Icons.backspace),
                   iconSize: 40,
                 )
@@ -44,7 +45,7 @@ class MainPage extends StatelessWidget {
           Navigator.of(context)
               .push(MaterialPageRoute<void>(builder: (context) {
             return TimerPage(
-              testStr: kitchenTimerModel.totalSeconds,
+              seconds: timeDisplayModel.totalSeconds,
             );
           }));
         },

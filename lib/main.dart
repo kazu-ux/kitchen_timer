@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kitchen_timer/model/kitchen_timer_model.dart';
+import 'package:kitchen_timer/model/time_display_model.dart';
+import 'package:kitchen_timer/model/timer_model.dart';
 import 'package:kitchen_timer/ui/main_page.dart';
 import 'package:provider/provider.dart';
 
@@ -12,8 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<KitchenTimerModel>(
-            create: (context) => KitchenTimerModel())
+        ChangeNotifierProvider<TimeDisplayModel>(
+          create: (context) => TimeDisplayModel(),
+        ),
+        ChangeNotifierProvider<TimerModel>(
+          create: (context) => TimerModel(),
+        )
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
