@@ -40,7 +40,7 @@ class TimerPage extends StatelessWidget {
                     )),
                 Selector<TimerModel, bool>(
                   selector: (context, model) => model.isRunning,
-                  builder: (context, aaa, child) => timerModel.setIcon(),
+                  builder: (context, _, child) => timerModel.setIcon(),
                 )
               ],
             ),

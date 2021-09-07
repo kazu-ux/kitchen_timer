@@ -21,14 +21,10 @@ class TimerModel extends ChangeNotifier {
         isRunning = false;
       }
 
-      secondsTimeDisplay = (seconds--).toString();
+      secondsTimeDisplay = (seconds - (time.tick - 1)).toString();
       notifyListeners();
     });
     isRunning = true;
-  }
-
-  void pauseTimer() {
-    timer.cancel();
   }
 
   IconButton setIcon() {
