@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 class TimerPage extends StatelessWidget {
   final int seconds;
-  TimerPage({Key? key, required this.seconds}) : super(key: key);
+  const TimerPage({Key? key, required this.seconds}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     context.read<TimerModel>().startTimer(seconds);
