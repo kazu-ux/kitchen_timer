@@ -9,26 +9,44 @@ class TimerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<TimerModel>().startTimer(seconds);
-    // final secondsTimeDisplay = context.read<TimerModel>().secondsTimeDisplay;
+    final timerModel = context.read<TimerModel>();
 
     return Scaffold(
-      body: Center(child: Consumer<TimerModel>(
-        builder: (context, model, _) {
-          return _TimeDisplay();
-        },
-      )),
-    );
-  }
-}
-
-class _TimeDisplay extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final secondsTimeDisplay = context.watch<TimerModel>().secondsTimeDisplay;
-    print(secondsTimeDisplay.toString());
-    return Text(
-      secondsTimeDisplay,
-      style: const TextStyle(fontSize: 40),
+      body: Center(
+        child: Column(
+          children: [
+            Consumer<TimerModel>(
+              builder: (context, model, _) {
+                return Text(
+                  model.secondsTimeDisplay,
+                  style: const TextStyle(fontSize: 100),
+                );
+              },
+            ),
+            TextButton(
+                onPressed: () {},
+                child: const Text(
+                  'リセット',
+                  style: TextStyle(fontSize: 50),
+                )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                    iconSize: 100,
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.delete,
+                    )),
+                Selector<TimerModel, bool>(
+                  selector: (context, model) => model.isRunning,
+                  builder: (context, aaa, child) => timerModel.setIcon(),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
