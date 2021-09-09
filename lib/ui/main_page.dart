@@ -42,9 +42,7 @@ class MainPage extends StatelessWidget {
         onPressed: () {
           Navigator.of(context)
               .push(MaterialPageRoute<void>(builder: (context) {
-            return TimerPage(
-              seconds: timeDisplayModel.totalSeconds,
-            );
+            return const TimerPage();
           }));
         },
         child: const Icon(Icons.play_arrow),

@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kitchen_timer/model/time_display_model.dart';
 import 'package:kitchen_timer/model/timer_model.dart';
 import 'package:provider/provider.dart';
 
 class TimerPage extends StatelessWidget {
-  final int seconds;
-  const TimerPage({Key? key, required this.seconds}) : super(key: key);
+  const TimerPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    context.read<TimerModel>().startTimer(seconds);
+    final timeDisplayModel = context.read<TimeDisplayModel>();
+    context.read<TimerModel>().startTimer(timeDisplayModel.totalSeconds);
     final timerModel = context.read<TimerModel>();
 
     return Scaffold(
