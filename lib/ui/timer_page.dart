@@ -9,8 +9,9 @@ class TimerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final timeDisplayModel = context.read<TimeDisplayModel>();
-    context.read<TimerModel>().startTimer(timeDisplayModel.totalSeconds);
+    // context.read<TimerModel>().startTimer(timeDisplayModel.totalSeconds);
     final timerModel = context.read<TimerModel>();
+    timerModel.startTimer(timeDisplayModel.totalSeconds);
 
     return Scaffold(
       body: Center(

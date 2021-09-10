@@ -8,6 +8,7 @@ class TimerModel extends ChangeNotifier {
   bool isRunning = false;
   final dul = const Duration(seconds: 1);
   late Timer timer;
+  late int seconds;
 
   void startTimer(int seconds) {
     if (isRunning) {
@@ -25,6 +26,10 @@ class TimerModel extends ChangeNotifier {
       notifyListeners();
     });
     isRunning = true;
+  }
+
+  void resetTimer() {
+    print(seconds);
   }
 
   IconButton setIcon() {
