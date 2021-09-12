@@ -37,7 +37,10 @@ class TimerPage extends StatelessWidget {
               children: [
                 IconButton(
                     iconSize: 100,
-                    onPressed: () {},
+                    onPressed: () {
+                      timerModel.deleteTimer();
+                      Navigator.pop(context);
+                    },
                     icon: const Icon(
                       Icons.delete,
                     )),

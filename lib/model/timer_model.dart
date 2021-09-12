@@ -41,6 +41,11 @@ class TimerModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deleteTimer() {
+    timer.cancel();
+    isRunning = false;
+  }
+
   IconButton setIcon() {
     print(isRunning);
     if (isRunning) {
