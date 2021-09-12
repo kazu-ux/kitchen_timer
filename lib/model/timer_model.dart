@@ -4,41 +4,51 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TimerModel extends ChangeNotifier {
-  String secondsTimeDisplay = '';
+  int displayedSeconds = 0;
+  int defaultSeconds = 0;
+
   bool isRunning = false;
   final dul = const Duration(seconds: 1);
   late Timer timer;
-  late int seconds;
 
-  void startTimer(int seconds) {
+  void startTimer(int inputedSeconds) {
+    if (defaultSeconds == 0) {
+      defaultSeconds = inputedSeconds;
+    }
+    displayedSeconds = inputedSeconds;
     if (isRunning) {
       return;
     }
 
     timer = Timer.periodic(dul, (time) {
       // 残り秒数が0になったらTimerを止める
-      if (secondsTimeDisplay == '1') {
+      if (displayedSeconds == 1) {
         time.cancel();
         isRunning = false;
       }
 
-      secondsTimeDisplay = (seconds - (time.tick - 1)).toString();
+      displayedSeconds--;
       notifyListeners();
     });
     isRunning = true;
   }
 
   void resetTimer() {
-    print(seconds);
+    timer.cancel();
+    displayedSeconds = defaultSeconds;
+    print(defaultSeconds);
+    isRunning = false;
+    notifyListeners();
   }
 
   IconButton setIcon() {
-    print('test');
+    print(isRunning);
     if (isRunning) {
       return IconButton(
         iconSize: 100,
         onPressed: () {
           timer.cancel();
+
           isRunning = false;
           notifyListeners();
         },
@@ -48,10 +58,12 @@ class TimerModel extends ChangeNotifier {
     return IconButton(
       iconSize: 100,
       onPressed: () {
-        if (secondsTimeDisplay == '0') {
+        if (displayedSeconds == 0) {
           return;
         }
-        startTimer(int.parse(secondsTimeDisplay));
+        startTimer(displayedSeconds);
+        isRunning = true;
+        notifyListeners();
       },
       icon: const Icon(Icons.play_circle),
     );
