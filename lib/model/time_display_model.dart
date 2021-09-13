@@ -27,7 +27,9 @@ class TimeDisplayModel extends ChangeNotifier {
       return;
     }
     inputedNumber.add(int.parse(str));
-    inputedNumber.removeAt(0);
+    {
+      inputedNumber.removeAt(0);
+    }
     convertListNumberToText(inputedNumber);
     convertIntoSeconds();
     notifyListeners();
@@ -38,7 +40,9 @@ class TimeDisplayModel extends ChangeNotifier {
       return;
     }
     inputedNumber.removeLast();
-    inputedNumber.insert(0, 0);
+    {
+      inputedNumber.insert(0, 0);
+    }
     convertListNumberToText(inputedNumber);
     convertIntoSeconds();
     notifyListeners();
