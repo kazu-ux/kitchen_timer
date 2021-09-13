@@ -44,6 +44,7 @@ class TimerModel extends ChangeNotifier {
   void deleteTimer() {
     timer.cancel();
     isRunning = false;
+    defaultSeconds = 0;
   }
 
   IconButton setIcon() {
