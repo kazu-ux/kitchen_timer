@@ -47,4 +47,11 @@ class TimeDisplayModel extends ChangeNotifier {
     convertIntoSeconds();
     notifyListeners();
   }
+
+  void allDelete() {
+    inputedNumber = [0, 0, 0, 0, 0, 0];
+    convertListNumberToText(inputedNumber);
+    convertIntoSeconds();
+    notifyListeners();
+  }
 }

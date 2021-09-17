@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TimerModel extends ChangeNotifier {
-  int displayedSeconds = 0;
+  late String displayedTime;
+  int countSeconds = 0;
   int defaultSeconds = 0;
 
   bool isRunning = false;
@@ -15,19 +16,18 @@ class TimerModel extends ChangeNotifier {
     if (defaultSeconds == 0) {
       defaultSeconds = inputedSeconds;
     }
-    displayedSeconds = inputedSeconds;
+    countSeconds = inputedSeconds;
     if (isRunning) {
       return;
     }
-
+    convertTimeFormat(inputedSeconds);
     timer = Timer.periodic(dul, (time) {
       // 残り秒数が0になったらTimerを止める
-      if (displayedSeconds == 1) {
+      if (displayedTime == '00:00:01') {
         time.cancel();
         isRunning = false;
       }
-
-      displayedSeconds--;
+      convertTimeFormat(inputedSeconds--);
       notifyListeners();
     });
     isRunning = true;
@@ -35,7 +35,8 @@ class TimerModel extends ChangeNotifier {
 
   void resetTimer() {
     timer.cancel();
-    displayedSeconds = defaultSeconds;
+    // countSeconds = defaultSeconds;
+    convertTimeFormat(defaultSeconds);
     print(defaultSeconds);
     isRunning = false;
     notifyListeners();
@@ -45,6 +46,23 @@ class TimerModel extends ChangeNotifier {
     timer.cancel();
     isRunning = false;
     defaultSeconds = 0;
+  }
+
+  void convertTimeFormat(int totalSeconds) {
+    final hours = totalSeconds ~/ 3600;
+    late int minutes;
+    if (totalSeconds ~/ 60 == 60) {
+      minutes = 0;
+    } else {
+      minutes = totalSeconds ~/ 60;
+    }
+
+    final seconds = totalSeconds % 60;
+
+    // print(totalSeconds % 3600);
+
+    displayedTime =
+        '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
   }
 
   IconButton setIcon() {
@@ -64,10 +82,10 @@ class TimerModel extends ChangeNotifier {
     return IconButton(
       iconSize: 100,
       onPressed: () {
-        if (displayedSeconds == 0) {
+        if (countSeconds == 0) {
           return;
         }
-        startTimer(displayedSeconds);
+        startTimer(countSeconds);
         isRunning = true;
         notifyListeners();
       },
