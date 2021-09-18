@@ -19,7 +19,6 @@ class TimerPage extends StatelessWidget {
           children: [
             Consumer<TimerModel>(
               builder: (context, model, _) {
-                // model.startTimer(timeDisplayModel.totalSeconds);
                 return Text(
                   (model.displayedTime).toString(),
                   style: const TextStyle(fontSize: 100),

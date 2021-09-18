@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kitchen_timer/model/time_display_model.dart';
-import 'package:kitchen_timer/model/timer_model.dart';
 import 'package:kitchen_timer/ui/timer_page.dart';
 import 'package:kitchen_timer/ui/widget/keyboard.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +45,10 @@ class MainPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          if (timeDisplayModel.totalSeconds == 0) {
+            return;
+          }
+
           Navigator.of(context)
               .push(MaterialPageRoute<void>(builder: (context) {
             return const TimerPage();
