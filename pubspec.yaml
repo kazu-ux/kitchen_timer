@@ -32,6 +32,7 @@ dependencies:
   pedantic_mono: ^1.13.0+3
   intl: ^0.17.0
   sqflite: ^2.0.0+4
+  path_provider: ^2.0.4
 
 dev_dependencies:
   flutter_test:
