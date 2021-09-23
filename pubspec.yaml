@@ -34,6 +34,12 @@ dependencies:
   sqflite: ^2.0.0+4
   path_provider: ^2.0.4
 
+  window_size:
+    git:
+      url: git://github.com/google/flutter-desktop-embedding
+      path: plugins/window_size
+      ref: e48abe7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
