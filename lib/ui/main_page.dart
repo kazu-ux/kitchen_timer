@@ -1,16 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kitchen_timer/db/db.dart';
 import 'package:kitchen_timer/model/time_display_model.dart';
 import 'package:kitchen_timer/ui/timer_page.dart';
 import 'package:kitchen_timer/ui/widget/keyboard.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 Future<void> pathTest() async {
-  final directory = await getApplicationDocumentsDirectory();
-  final path = directory.path;
-
-  print(path);
+  final memo = Memo();
+  memo.testFunc();
 }
 
 class MainPage extends StatelessWidget {

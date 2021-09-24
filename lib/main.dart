@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:kitchen_timer/db/db.dart';
 import 'package:kitchen_timer/model/time_display_model.dart';
 import 'package:kitchen_timer/model/timer_model.dart';
 import 'package:kitchen_timer/ui/main_page.dart';
@@ -12,7 +13,7 @@ void main() async {
 
   if (Platform.isWindows) {
     setWindowTitle('ドラえもん');
-    setWindowFrame(const Rect.fromLTWH(10, 100, 1000, 1000));
+    setWindowFrame(const Rect.fromLTWH(10, 100, 1000, 2000));
   }
   runApp(const MyApp());
 }

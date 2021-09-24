@@ -1,24 +1,24 @@
-import 'package:flutter/cupertino.dart';
-import 'package:sqflite/sqflite.dart';
 import 'dart:async';
+import 'dart:io';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path_provider_windows/path_provider_windows.dart';
 
 class Memo {
-  final int id;
-  final String text;
-  final int priority;
+  final testValue = 0;
 
-  Memo({required this.id, required this.text, required this.priority});
-}
+  void testFunc() async {
+    final directory = await getApplicationSupportDirectory();
+    // final path = directory.path;
+    final currentPath = Directory.current.path;
+    // final dbPath = '$currentPath\\myBox';
 
-void main() async {
-  final database = openDatabase(
-    join(await getDatabasesPath(), 'doggie_datavase.db'),
-    onCreate: (db, varsion) {
-      return db.execute(
-        'CREATE TABLE dogs(id INTEGER PRIMARY KEY, name TEXT, age INTEGER)',
-      );
-    },
-    version: 1,
-  );
+    // print(dbPath);
+
+    await Hive.initFlutter();
+    var box = await Hive.openBox<String>('myBox', path: currentPath);
+    await box.close();
+  }
 }
