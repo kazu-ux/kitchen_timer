@@ -1,9 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kitchen_timer/db/db.dart';
 import 'package:kitchen_timer/model/time_display_model.dart';
 import 'package:kitchen_timer/ui/timer_page.dart';
 import 'package:kitchen_timer/ui/widget/keyboard.dart';
 import 'package:provider/provider.dart';
+
+Future<void> pathTest() async {
+  final memo = Memo();
+  memo.testFunc();
+}
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -40,6 +46,13 @@ class MainPage extends StatelessWidget {
               ],
             ),
             const Keyboard(),
+            GestureDetector(
+              onTap: pathTest,
+              child: const Icon(
+                Icons.backup_table,
+                size: 100,
+              ),
+            )
           ],
         ),
       ),
